@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/users/")
 public class UserController {
 
   @Autowired
@@ -24,7 +24,7 @@ public class UserController {
     return userRepository.findAll();
   } 
 
-  @GetMapping("/{id}")
+  @GetMapping("{id}")
   public User getUserById(@PathVariable Long id) {
     return userRepository.findById(id).get();
   }
@@ -34,7 +34,7 @@ public class UserController {
     return userRepository.save(user);
   }
   
-  @PutMapping("/{id}")
+  @PutMapping("{id}")
   public User updateUser(@PathVariable Long id, @RequestBody User user) {
     User existingUser = userRepository.findById(id).get();
     existingUser.setName(user.getName());
@@ -42,7 +42,7 @@ public class UserController {
     return userRepository.save(existingUser);
   }
 
-  @DeleteMapping("/{id}")
+  @DeleteMapping("{id}")
   public String deleteUser(@PathVariable Long id) {
     try {
       userRepository.findById(id).get();
